@@ -1,0 +1,21 @@
+{
+  "name": "Pombo Correio",
+  "description": "An inline Telegram bot to keep your private messages hidden from prying eyes.",
+  "repository": "https://github.com/leviobrabo/Pombo-Correiro",
+  "env": {
+    "API_TOKEN": {
+      "description": "Telegram API bot token",
+      "value": ""
+    },
+    "LOG_PATH": {
+      "description": "Path to the log-file",
+      "value": "Logs/session.log",
+      "required": false
+    },
+      "DATABASE_URL": {
+      "description": "URL for the PostgreSQL database",
+      "value": "",
+      "required": true
+    }
+}
+}
