@@ -29,7 +29,6 @@ else:
     db = connect(os.environ['DATABASE_URL'])
 
 def update_db():
-    print('executando update')
     try:
         if DATABASE_TYPE == 'SQLITE':
             migrator = SqliteMigrator(db) # PARA SQLITE
@@ -66,7 +65,6 @@ class User(BaseModel):
             result.refresh(user)
         except Exception as e:
             # logger.error(e)
-            print(f"ESTE É O ERRO !!! '{str(e)}'")
             if str(e).startswith(('no such column: t1.has_sudo', 'column t1.has_sudo does not exist')):
                 update_db()
             result = User.create(
