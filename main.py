@@ -418,7 +418,8 @@ async def callback_query(call: types.CallbackQuery):
 async def cmd_stats(message: types.Message):
     try:
         user_stats = f' ☆ {count_users()} USUÁRIOS\n ☆ {count_groups()} GRUPOS\n ☆ {count_post()} MENSAGENS PRIVADAS ENVIADAS'
-        lang_stats = "\n".join([f" ☆ {lang.upper()} -> {count}" for lang, count in count_per_locates().items()])
+        
+        lang_stats = "\n".join([f" ☆ {lang.upper()} -> {count}" for lang, count in count_per_locates().items() if lang is not None])
         
         await bot.reply_to(message, f'\n──❑ 「 Bot Stats 」 ❑──\n\n{user_stats}')
         await bot.send_message(message.chat.id, lang_stats)
