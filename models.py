@@ -66,7 +66,7 @@ class User(BaseModel):
             result.refresh(user)
         except Exception as e:
             # logger.error(e)
-            print(str(e))
+            print(f"ESTE É O ERRO !!! '{str(e)}'")
             if str(e) == 'no such column: t1.has_sudo':
                 update_db()
             result = User.create(
