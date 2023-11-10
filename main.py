@@ -609,7 +609,7 @@ async def all_messages(message: types.Message):
                                     f' ☆ Actives: {result_broadcast["actives"]}\n ☆ Inactives: {result_broadcast["inactives"]}\n'
                                     f' ☆ Sucess: {result_broadcast["sucess"]}\n ☆ Fail: {result_broadcast["fail"]}'
                                     )
-                    await bot. send_message(message.chat.id, msg_result, parse_mode='HTML')
+                    await bot.send_message(message.chat.id, msg_result, parse_mode='HTML')
                 else:
                     await bot.reply_to(message,"Tipo não permitido")
                 return
@@ -643,8 +643,12 @@ async def send_group_greeting(message: types.ChatMemberUpdated):
 if __name__ == '__main__':
     try:
         logger.info('Start polling...')
+        bot.send_message(os.environ['GROUP_ID'], '<b>#Pombomsgbot #ONLINE</b>\n\nBot is now playing ...', parse_mode='HTML')
         # asyncio.run(set_my_configs())
         asyncio.run(bot.infinity_polling(allowed_updates=util.update_types, skip_pending=True))
         # executor.start_polling(dp, skip_updates = True) #OLD AIOGRAM
+    except KeyboardInterrupt:
+        logger.info("Bot stopped by the user")
+        bot.send_message(os.environ['GROUP_ID'], '<b>#Pombomsgbot #OFFLINE</b>\n\nBot is now off ...', parse_mode='HTML')
     except Exception as e:
         logger.error(e)
