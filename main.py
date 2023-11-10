@@ -640,15 +640,25 @@ async def send_group_greeting(message: types.ChatMemberUpdated):
         except Exception as e:
             logger.error(e)
 
+GROUP_ID= os.environ['GROUP_ID']
+
+async def send_initial_message():
+    await bot.send_message(GROUP_ID, '<b>#Pombomsgbot #Online</b>\n\nBot is now playing ...', parse_mode='HTML')
+
+
+async def send_shutdown_message():
+    await bot.send_message(GROUP_ID, '<b>#Pombomsgbot #Offline</b>\n\nBot is now off ...', parse_mode='HTML')
+
+
+
 if __name__ == '__main__':
     try:
         logger.info('Start polling...')
-        bot.send_message(os.environ['GROUP_ID'], '<b>#Pombomsgbot #ONLINE</b>\n\nBot is now playing ...', parse_mode='HTML')
-        # asyncio.run(set_my_configs())
+        asyncio.run(send_initial_message())        # asyncio.run(set_my_configs())
         asyncio.run(bot.infinity_polling(allowed_updates=util.update_types, skip_pending=True))
         # executor.start_polling(dp, skip_updates = True) #OLD AIOGRAM
     except KeyboardInterrupt:
         logger.info("Bot stopped by the user")
-        bot.send_message(os.environ['GROUP_ID'], '<b>#Pombomsgbot #OFFLINE</b>\n\nBot is now off ...', parse_mode='HTML')
+        asyncio.run(send_shutdown_message())
     except Exception as e:
         logger.error(e)
