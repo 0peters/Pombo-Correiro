@@ -417,10 +417,9 @@ async def callback_query(call: types.CallbackQuery):
 @bot.message_handler(commands=['stats'])
 async def cmd_stats(message: types.Message):
     try:
-        await bot.reply_to(message,f'\n──❑ 「 Bot Stats 」 ❑──\n\n ☆ {count_users()} usuários\n ☆ {count_groups()} Grupos\n ☆ {count_post()} mensagem privadas enviadas')
-        msg = ""
-        msg += "\n".join([f" ☆ {lang} -> {count}" for lang, count in count_per_locates().items()])
-        await bot.send_message(message.chat.id,msg)
+        user_stats = f' ☆ {count_users()} usuários\n ☆ {count_groups()} Grupos\n ☆ {count_post()} mensagem privadas enviadas'
+        lang_stats = "\n".join([f" ☆ {lang} -> {count}" for lang, count in count_per_locates().items()])
+        await bot.reply_to(message, f'\n──❑ 「 Bot Stats 」 ❑──\n\n{user_stats}\n\n{lang_stats}')
     except Exception as e:
         logger.error(e)
         logger.warning('Não é possível manipular o comando /stats de ' + get_formatted_username_or_id(message.from_user))
