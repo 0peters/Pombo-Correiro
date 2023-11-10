@@ -637,7 +637,7 @@ async def send_group_greeting(message: types.ChatMemberUpdated):
 if __name__ == '__main__':
     try:
         logger.info('Start polling...')
-        asyncio.run(set_my_configs())
+        # asyncio.run(set_my_configs())
         asyncio.run(bot.infinity_polling(allowed_updates=util.update_types, skip_pending=True))
         # executor.start_polling(dp, skip_updates = True) #OLD AIOGRAM
     except Exception as e:
