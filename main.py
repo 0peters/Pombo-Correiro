@@ -419,8 +419,7 @@ async def cmd_stats(message: types.Message):
     try:
         await bot.reply_to(message,f'\n──❑ 「 Bot Stats 」 ❑──\n\n ☆ {count_users()} usuários\n ☆ {count_groups()} Grupos\n ☆ {count_post()} mensagem privadas enviadas')
         msg = ""
-        for lang, count in count_per_locates().items():
-            msg = f" ☆ {lang} -> {count}"
+        msg += "\n".join([f" ☆ {lang} -> {count}" for lang, count in count_per_locates().items()])
         await bot.send_message(message.chat.id,msg)
     except Exception as e:
         logger.error(e)
