@@ -62,19 +62,23 @@ async def set_my_configs():
         except Exception as ex:
             logger.error(ex)
     for admin in admins:
-        await bot.set_my_commands(
-                        [
-                            types.BotCommand("/start", locales['pt'].commands_start),
-                            types.BotCommand("/help", locales['pt'].commands_help),
-                            types.BotCommand("/sys", 'Uso do servidor'),
-                            types.BotCommand("/sudo", 'Elevar usuário'),
-                            types.BotCommand("/ban", 'Banir usuário do bot'),
-                            types.BotCommand("/sudolist", 'Lista de usuários sudo'),
-                            types.BotCommand("/banneds", 'Lista de usuários banidos'),
-                            types.BotCommand("/bcusers", 'Enviar msg broadcast para usuários'),
-                            types.BotCommand("/bcgps", 'Enviar msg broadcast para grupos')
-                        ],
-                        scope=types.BotCommandScopeChat(chat_id=admin))
+        try:
+            await bot.set_my_commands(
+                            [
+                                types.BotCommand("/start", locales['pt'].commands_start),
+                                types.BotCommand("/help", locales['pt'].commands_help),
+                                types.BotCommand("/sys", 'Uso do servidor'),
+                                types.BotCommand("/sudo", 'Elevar usuário'),
+                                types.BotCommand("/ban", 'Banir usuário do bot'),
+                                types.BotCommand("/sudolist", 'Lista de usuários sudo'),
+                                types.BotCommand("/banneds", 'Lista de usuários banidos'),
+                                types.BotCommand("/bcusers", 'Enviar msg broadcast para usuários'),
+                                types.BotCommand("/bcgps", 'Enviar msg broadcast para grupos')
+                            ],
+                            scope=types.BotCommandScopeChat(chat_id=admin))
+        except Exception as ex:
+            logger.error(ex)
+
 
 async def sendStatus():
     start = datetime.now()
