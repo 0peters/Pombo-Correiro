@@ -29,6 +29,7 @@ else:
     db = connect(os.environ['DATABASE_URL'])
 
 def update_db():
+    print('executando update')
     try:
         if DATABASE_TYPE == 'SQLITE':
             migrator = SqliteMigrator(db) # PARA SQLITE
