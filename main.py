@@ -239,7 +239,7 @@ async def send_message_broadcast(message, receiver):
                     # Se hover erro de flood, ele aguarda o tempo de cooldown e tenta novamente
                     cooldown = ex.result_json['parameters']['retry_after']
                     logger.error(f"erro de Flood, tentativa: {_try} , esperar por:", cooldown)
-                    sleep(cooldown+1)
+                    time.sleep(cooldown+1)
                     continue
                 else:
                     # Se o erro for outro qualquer do Telegram, como bot bloqueado, chat inexistente, etc encerra as tentativas
