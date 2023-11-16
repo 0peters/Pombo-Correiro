@@ -62,11 +62,11 @@ class Keyboards:
         locale = self.locales[lang]
         return types.InlineKeyboardMarkup(keyboard=[
             [types.InlineKeyboardButton(locale.button_addGroup, url='https://t.me/pombomsgbot?startgroup=true')],
-            [types.InlineKeyboardButton(locale.button_use_message, url='https://t.me/pombomsgbotchannel/4'),
+            [types.InlineKeyboardButton(locale.button_use_message, url='https://t.me/+0ommac6hJVphMGNh'),
              types.InlineKeyboardButton(locale.button_support_message, url='https://t.me/Kylorensbot')],
             [types.InlineKeyboardButton(locale.button_channel_message, url='https://t.me/pombomsgbotchannel'),
              types.InlineKeyboardButton(locale.button_donate_message, callback_data='donate_button')],
-            [types.InlineKeyboardButton(locale.how_to_use, callback_data='how_to_use')]
+            [types.InlineKeyboardButton(locale.button_how_to_use, callback_data='how_to_use')]
 
         ])
     
