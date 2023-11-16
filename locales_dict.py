@@ -26,6 +26,7 @@ class Locale():
     button_addGroup: str
     
     how_to_use_link:str
+    how_to_use_text:str
 
 class LocalesDict:
     def __init__(self, locales, default_locale: Locale):

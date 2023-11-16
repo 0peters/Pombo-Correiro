@@ -368,6 +368,10 @@ async def callback_query(call: types.CallbackQuery):
                             " ☆ <b>BTC:</b>\n <code>bc1qjxzlug0cwnfjrhacy9kkpdzxfj0mcxc079axtl</code>\n\n"
                             " ☆ <b>ETH/USDT:</b>\n <code>0x1fbde0d2a96869299049f4f6f78fbd789d167d1b</code>")
                 await bot.edit_message_text(text_msg, call.message.chat.id, call.message.id , parse_mode="HTML", reply_markup=buttons)
+        elif call.data == "how_to_use":
+            buttons = types.InlineKeyboardMarkup(keyboard=[
+                    [types.InlineKeyboardButton('🔙', callback_data='back_to_home')]])
+            await bot.edit_message_text(locales[call.from_user.language_code].how_to_use_text, call.message.chat.id, call.message.id , parse_mode="HTML", reply_markup=buttons)
         elif call.data == "back_to_home":
             await bot.edit_message_text(
                     locales[call.from_user.language_code].info_message,
@@ -422,8 +426,7 @@ async def cmd_stats(message: types.Message):
         lang_stats_title = ' ☆ Estatísticas por Idioma:'
         lang_stats = "\n".join([f" ☆ {lang.upper()} -> {count}" for lang, count in count_per_locates().items() if lang is not None])
         
-        await bot.reply_to(message, f'\n──❑ 「 Bot Stats 」 ❑──\n\n{user_stats}')
-        await bot.send_message(message.chat.id, f'{lang_stats_title}\n\n{lang_stats}')
+        await bot.reply_to(message, f'\n──❑ 「 Bot Stats 」 ❑──\n\n{user_stats}\n\n{lang_stats_title}\n\n{lang_stats}')
     except Exception as e:
         logger.error(e)
         logger.warning('Não é possível manipular o comando /stats de ' + get_formatted_username_or_id(message.from_user))
@@ -654,7 +657,8 @@ async def send_shutdown_message():
 if __name__ == '__main__':
     try:
         logger.info('Start polling...')
-        asyncio.run(send_initial_message())        # asyncio.run(set_my_configs())
+        asyncio.run(send_initial_message())        
+        # asyncio.run(set_my_configs())
         asyncio.run(bot.infinity_polling(allowed_updates=util.update_types, skip_pending=True))
         # executor.start_polling(dp, skip_updates = True) #OLD AIOGRAM
     except KeyboardInterrupt:

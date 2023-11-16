@@ -66,6 +66,8 @@ class Keyboards:
              types.InlineKeyboardButton(locale.button_support_message, url='https://t.me/Kylorensbot')],
             [types.InlineKeyboardButton(locale.button_channel_message, url='https://t.me/pombomsgbotchannel'),
              types.InlineKeyboardButton(locale.button_donate_message, callback_data='donate_button')]
+            [types.InlineKeyboardButton(locale.how_to_use, callback_data='how_to_use')],
+
         ])
     
     
