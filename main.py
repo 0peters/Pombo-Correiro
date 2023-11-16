@@ -356,7 +356,7 @@ async def callback_query(call: types.CallbackQuery):
         if call.data == "donate_button":
             # await bot.answer_callback_query(call.id, "Processing...")
             buttons = types.InlineKeyboardMarkup(keyboard=[
-                    [types.InlineKeyboardButton('🔙', callback_data='back_to_home')]])
+                    [types.InlineKeyboardButton(locales[call.from_user.language_code].button_back, callback_data='back_to_home')]])
             if call.from_user.language_code == 'pt-br':
                 text_msg = (f"──❑ 「 {locales[call.from_user.language_code].button_donate_message} 」 ❑──\n\n"
                             " ☆ <b>Pix:</b>\n <code>32dc79d2-2868-4ef0-a277-2c10725341d4</code>\n\n"
@@ -370,7 +370,7 @@ async def callback_query(call: types.CallbackQuery):
                 await bot.edit_message_text(text_msg, call.message.chat.id, call.message.id , parse_mode="HTML", reply_markup=buttons)
         elif call.data == "how_to_use":
             buttons = types.InlineKeyboardMarkup(keyboard=[
-                    [types.InlineKeyboardButton('🔙', callback_data='back_to_home')]])
+                    [types.InlineKeyboardButton(locales[call.from_user.language_code].button_back, callback_data='back_to_home')]])
             await bot.edit_message_text(locales[call.from_user.language_code].how_to_use_text, call.message.chat.id, call.message.id , parse_mode="HTML", reply_markup=buttons)
         elif call.data == "back_to_home":
             await bot.edit_message_text(

@@ -27,6 +27,7 @@ class Locale():
     
     how_to_use_link:str
     how_to_use_text:str
+    button_back:str
 
 class LocalesDict:
     def __init__(self, locales, default_locale: Locale):
