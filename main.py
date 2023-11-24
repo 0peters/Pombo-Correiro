@@ -593,7 +593,6 @@ async def all_messages(message: types.Message):
                     await send_new_group_message(message.chat)
                     
             if message.reply_to_message:
-                print(message.content_type)
                 if message.reply_to_message.text in [broadcast_text.format('users'),broadcast_text.format('grupos')]:
                     type_permited = ['text','photo','audio','video','sticker','voice','video_note','animation']
                     if message.content_type in type_permited:
