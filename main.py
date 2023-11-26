@@ -576,27 +576,26 @@ async def all_messages(message: types.Message):
                 command = message.text
                 if message.text.find(" ") > 0:
                     command = message.text[:message.text.find(" ")]
-            if (command is not None and
-                command.lower().endswith((await bot.get_me()).username.lower())):
-                command = command.split('@')[0]
-            if message.chat.type == "private":
-                    target = User.get_or_create(message.from_user)
-                    if target.has_dialog:
-                        target.save()
-                    else:
-                        await send_new_user_message(message.from_user)
-            else:
-                target = Group.get_or_create(message.chat)
+        if (command is not None and
+            command.lower().endswith((await bot.get_me()).username.lower())):
+            command = command.split('@')[0]
+        if message.chat.type == "private":
+                target = User.get_or_create(message.from_user)
                 if target.has_dialog:
                     target.save()
                 else:
-                    await send_new_group_message(message.chat)
-                    
+                    await send_new_user_message(message.from_user)
+        else:
+            target = Group.get_or_create(message.chat)
+            if target.has_dialog:
+                target.save()
+            else:
+                await send_new_group_message(message.chat)
+        if message.chat.type == "private" and str(message.chat.id) in admins:
             if message.reply_to_message:
                 if message.reply_to_message.text in [broadcast_text.format('users'),broadcast_text.format('grupos')]:
                     type_permited = ['text','photo','audio','video','sticker','voice','video_note','animation']
                     if message.content_type in type_permited:
-                        
                         target_type = ''
                         result_broadcast = {}
                         if message.reply_to_message.text == broadcast_text.format('users'):
